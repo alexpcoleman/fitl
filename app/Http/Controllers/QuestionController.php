@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Question;
+
 class QuestionController extends Controller
 {
     /**
@@ -47,7 +49,12 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = array();
+
+        $question = Question::findOrFail($id);
+        $data['object'] = $question;
+
+        return view('questions/show', $data);
     }
 
     /**
