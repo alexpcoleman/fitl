@@ -20,5 +20,6 @@ Route::get('welcome', function () {
 });
 
 Route::get('about', 'PageController@about');
+Route::get('contact', 'PageController@contact');
 
 Route::get('questions/{question}', 'QuestionController@show');

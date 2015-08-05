@@ -54,7 +54,7 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
         $data['object'] = $question;
 
-        return view('questions/show', $data);
+        return view('questions.show', $data);
     }
 
     /**
