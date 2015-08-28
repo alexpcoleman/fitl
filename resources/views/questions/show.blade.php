@@ -3,6 +3,7 @@
 @section('title', $object->title)
 
 @section('content')
+
 <div class="page-header">
 	<a href="{{ action('QuestionController@edit', $object->id) }}" 
 		class="btn btn-info pull-right">Edit</a>
@@ -14,4 +15,7 @@
 	<?php echo $object->code; ?>
 </pre>
 <p>Question submitted at: <?php echo $object->created_at; ?></p>
+
+@include('questions.comments.partials.display')
+
 @endsection

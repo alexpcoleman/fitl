@@ -8,3 +8,10 @@ $('form.delete-object').submit(function(e) {
 	return deleteConfirmed;
 
 });
+
+// toggle comment edit forms when "edit" buttons are clicked
+$('.edit-object').click(function(e) {
+	var $commentItem = $(this).closest('li');
+	var $commentForm = $commentItem.find('form.edit-object-form');
+	$commentForm.toggleClass('hide');
+});

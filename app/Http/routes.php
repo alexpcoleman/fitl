@@ -29,3 +29,7 @@ Route::post('questions/store', 'QuestionController@store');
 Route::get('questions/create', 'QuestionController@create');
 Route::get('questions/{question}', 'QuestionController@show');
 Route::get('questions', 'QuestionController@index');
+
+Route::resource('questions.comments', 'QuestionCommentController',
+								['only' => ['store', 'update', 'destroy']]);
+								
