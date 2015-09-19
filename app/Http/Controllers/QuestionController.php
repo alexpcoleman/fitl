@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Question;
+use App\Language;
 
 class QuestionController extends Controller
 {
@@ -36,6 +37,11 @@ class QuestionController extends Controller
         $question = new Question;
         $data = array();
         $data['question'] = $question;
+        // <select><option value="VALUE">TEXT</option></select>
+        // [ VALUE => TEXT, VALUE => TEXT ]
+        // <option value="1">JavaScript</option>
+        // <option value="2">PHP</option>
+        $data['languages'] = Language::lists('name', 'id');
         return view('questions.create', $data);
     }
 
@@ -66,6 +72,10 @@ class QuestionController extends Controller
         }
 
         // success!
+
+        // establish language relationships
+        $question->languages()->sync($request->language_id);
+
         return redirect()
             ->action('QuestionController@index')
             ->with('message', 
@@ -97,7 +107,8 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Question::findOrFail($id);
-        return view('questions.edit', ['question' => $question]);
+        $languages = Language::lists('name', 'id');
+        return view('questions.edit', ['question' => $question, 'languages' => $languages]);
     }
 
     /**
@@ -114,6 +125,7 @@ class QuestionController extends Controller
         $question->title = $request->title;
         $question->description = $request->description;
         $question->code = $request->code;
+        $question->languages()->sync($request->language_id);
 
         // if the save fails,
         // redirect back to the edit page
