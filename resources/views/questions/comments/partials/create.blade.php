@@ -1,6 +1,6 @@
 <h3>Add a Comment:</h3>
 
-{!! Form::open(['route' => ['questions.comments.store', $object->id]]) !!}
+{!! Form::open(['route' => ['questions.comments.store', $question->id]]) !!}
 
 	@include('questions.comments.partials.comment_form')
 

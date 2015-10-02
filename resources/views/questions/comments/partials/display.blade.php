@@ -7,7 +7,7 @@
 <hr>
 
 <ul class="list-group">
-@foreach ($object->comments as $comment)
+@foreach ($question->comments as $comment)
 	<li class="list-group-item">
 		<div class="text-muted">
 			<small>{{ $comment->created_at->diffForHumans() }}</small>

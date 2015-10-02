@@ -14,11 +14,15 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="main_menu">
+      
       <ul class="nav navbar-nav">
         <li><a href="{{ url('questions') }}">Questions</a></li>
         <li><a href="{{ url('about') }}">About</a></li>
         <li><a href="{{ url('contact') }}">Contact</a></li>
       </ul>
+
+      @include('shared.question_search_form')
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

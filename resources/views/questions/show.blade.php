@@ -1,20 +1,20 @@
 @extends('layouts.master')
 
-@section('title', $object->title)
+@section('title', $question->title)
 
 @section('content')
 
 <div class="page-header">
-	<a href="{{ action('QuestionController@edit', $object->id) }}" 
+	<a href="{{ action('QuestionController@edit', $question->id) }}" 
 		class="btn btn-info pull-right">Edit</a>
-	<h1><?php echo $object->title; ?></h1>
+	<h1><?php echo $question->title; ?></h1>
 </div>
 
-<p><?php echo $object->description; ?></p>
+<p><?php echo $question->description; ?></p>
 <pre>
-	<?php echo $object->code; ?>
+	<?php echo $question->code; ?>
 </pre>
-<p>Question submitted at: <?php echo $object->created_at; ?></p>
+<p>Question submitted at: <?php echo $question->created_at; ?></p>
 
 @include('questions.comments.partials.display')
 

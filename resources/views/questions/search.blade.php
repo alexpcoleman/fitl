@@ -1,7 +1,7 @@
 
 @extends('layouts.master')
 
-@section('title', 'Programming Questions')
+@section('title', 'Search results for "' . $q . '"')
 
 @section('content')
 
@@ -11,7 +11,7 @@
 
 		<div class="page-header">
 			<a href="{{ url('questions/create') }}" class="btn btn-success pull-right">+ Question</a>
-			<h1>Programming Questions</h1>
+			<h1>Search results for "{{ $q }}"</h1>
 		</div>
 
 		@include('questions.partials.questions')

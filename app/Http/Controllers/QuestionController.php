@@ -22,10 +22,27 @@ class QuestionController extends Controller
         $questions = Question::all();
 
         $data = array();
-        $data['objects'] = $questions;
+        $data['questions'] = $questions;
         $data['languages'] = Language::all();
 
         return view('questions.index', $data);
+    }
+
+    public function search(Request $request)
+    {
+        // retrieve query from URL
+        $q = $request->q;
+
+        // SQL LIKE format for matching on search query:
+        // %SEARCH_TERM%
+        $q_query = '%' . $q . '%';
+        $questions = Question::where('title', 'LIKE', $q_query)
+                            ->orWhere('description', 'LIKE', $q_query)
+                            ->orWhere('code', 'LIKE', $q_query)
+                            ->get();
+
+        return view('questions.search',
+            ['q' => $q, 'questions' => $questions, 'languages' => Language::all()]);
     }
 
     /**
@@ -94,7 +111,7 @@ class QuestionController extends Controller
         $data = array();
 
         $question = Question::findOrFail($id);
-        $data['object'] = $question;
+        $data['question'] = $question;
 
         return view('questions.show', $data);
     }

@@ -1,7 +1,7 @@
 
 {!! Form::model($comment, 
 	[
-		'route' => ['questions.comments.update', $object->id, $comment->id],
+		'route' => ['questions.comments.update', $question->id, $comment->id],
 		'method' => 'put',
 		'class' => 'hide edit-object-form'
 	]) !!}
