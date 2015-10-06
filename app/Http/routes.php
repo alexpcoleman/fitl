@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'QuestionController@index');
+
+Route::get('home', function() {
+	return redirect('/');
 });
 
-Route::get('welcome', function () {
-    return view('welcome');
-});
+// Route::get('welcome', function () {
+//     return view('welcome');
+// });
 
 Route::get('about', 'PageController@about');
 Route::get('contact', 'PageController@contact');
@@ -35,5 +37,9 @@ Route::resource('questions.comments', 'QuestionCommentController',
 								['only' => ['store', 'update', 'destroy']]);
 
 Route::resource('languages', 'LanguageController');
+
+// User routes
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 								
