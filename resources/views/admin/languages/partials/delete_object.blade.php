@@ -3,7 +3,7 @@
 <h2>Delete this language:</h2>
 
 {!! Form::open([ 
-	'route' => ['languages.destroy', $language->id],
+	'route' => ['admin.languages.destroy', $language->id],
 	'method' => 'delete',
 	'class' => 'delete-object'
 ]) !!}

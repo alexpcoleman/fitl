@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('title', 'Create a Programming Language')
 
@@ -8,9 +8,9 @@
 	<h1>Create a Programming Language</h1>
 </div>
 
-{!! Form::model($language, ['route' => 'languages.store']) !!}
+{!! Form::model($language, ['route' => 'admin.languages.store']) !!}
 
-	@include('languages.partials.object_form')
+	@include('admin.languages.partials.object_form')
 
   <button class="btn btn-success" type="submit">Create Language!</button>
 

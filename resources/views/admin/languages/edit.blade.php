@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('title', 'Edit a Programming Language')
 
@@ -10,17 +10,17 @@
 
 {!! Form::model($language, 
 	[ 
-		'route' => ['languages.update', $language->id],
+		'route' => ['admin.languages.update', $language->id],
 		'method' => 'put'
 	]
 	) !!}
 
-	@include('languages.partials.object_form')
+	@include('admin.languages.partials.object_form')
 
   <button class="btn btn-success" type="submit">Save Changes</button>
 
 {!! Form::close() !!}
 
-@include('languages.partials.delete_object')
+@include('admin.languages.partials.delete_object')
 
 @endsection

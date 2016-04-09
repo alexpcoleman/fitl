@@ -9,21 +9,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">ProgQuest</a>
+      <a class="navbar-brand" href="/">ProgQuest <strong>ADMIN</strong></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="main_menu">
       
       <ul class="nav navbar-nav">
-        <li><a href="{{ url('questions') }}">Questions</a></li>
-        <li><a href="{{ url('about') }}">About</a></li>
-        <li><a href="{{ url('contact') }}">Contact</a></li>
+        <li><a href="{{ url('/') }}">App Home</a></li>
+        <li><a href="{{ url('admin/users') }}">Users</a></li>
+        <li><a href="{{ url('admin/languages') }}">Languages</a></li>
       </ul>
 
       @include('shared.user_actions')
-      
-      @include('shared.question_search_form')
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
