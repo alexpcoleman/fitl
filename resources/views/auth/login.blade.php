@@ -30,4 +30,16 @@
 
 {!! Form::close() !!}
 
+<hr>
+
+<p>
+	Forgot your password? <a href="{{ action('Auth\PasswordController@getEmail') }}">Reset your password</a>
+</p>
+
+<hr>
+
+<p>
+	Don't have an account? <a href="{{ action('Auth\AuthController@getRegister') }}">Register now</a>
+</p>
+
 @endsection
