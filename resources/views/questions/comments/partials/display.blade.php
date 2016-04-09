@@ -13,12 +13,15 @@
 			<small>{{ $comment->created_at->diffForHumans() }}</small>
 		</div>
 		<p>{{ $comment->comment }}</p>
-		<div class="clearfix">
-			<button class="edit-object btn btn-info btn-xs pull-left">edit</button>
-			@include('questions.comments.partials.delete')
-		</div>
 
-		@include('questions.comments.partials.edit')
+		@if ( $comment->canEdit() )
+			<div class="clearfix">
+				<button class="edit-object btn btn-info btn-xs pull-left">edit</button>
+				@include('questions.comments.partials.delete')
+			</div>
+
+			@include('questions.comments.partials.edit')
+		@endif
 	</li>
 @endforeach
 </ul>

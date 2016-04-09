@@ -9,8 +9,15 @@ use App\Http\Controllers\Controller;
 
 use App\Comment;
 
+use Auth;
+
 class QuestionCommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -25,6 +32,7 @@ class QuestionCommentController extends Controller
 
         $comment->question_id = $questionId;
         $comment->comment = $request->comment;
+        $comment->user_id = Auth::user()->id;
 
         if ( ! $comment->save() ) {
             return redirect()
@@ -52,6 +60,10 @@ class QuestionCommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
+        if ( ! $comment->canEdit() ) {
+            abort('403', 'Not authorized.');
+        }
+
         $comment->comment = $request->comment;
 
         if ( ! $comment->save() ) {
@@ -78,6 +90,10 @@ class QuestionCommentController extends Controller
     public function destroy($questionId, $id)
     {
         $comment = Comment::findOrFail($id);
+
+        if ( ! $comment->canEdit() ) {
+            abort('403', 'Not authorized.');
+        }
 
         $comment->delete();
 

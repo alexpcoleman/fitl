@@ -10,8 +10,15 @@ use App\Http\Controllers\Controller;
 use App\Question;
 use App\Language;
 
+use Auth;
+
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -76,6 +83,7 @@ class QuestionController extends Controller
         $question->title = $request->title;
         $question->description = $request->description;
         $question->code = $request->code;
+        $question->user_id = Auth::user()->id;
 
         // create the new question in the database
         if (!$question->save()) {
@@ -92,7 +100,9 @@ class QuestionController extends Controller
         // success!
 
         // establish language relationships
-        $question->languages()->sync($request->language_id);
+        if ($request->language_id) {
+            $question->languages()->sync($request->language_id);
+        }
 
         return redirect()
             ->action('QuestionController@index')
@@ -125,6 +135,11 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Question::findOrFail($id);
+
+        if ( ! $question->canEdit() ) {
+            abort('403', 'Not authorized.');
+        }
+        
         $languages = Language::lists('name', 'id');
         return view('questions.edit', ['question' => $question, 'languages' => $languages]);
     }
@@ -138,6 +153,10 @@ class QuestionController extends Controller
     public function update($id, Request $request)
     {
         $question = Question::findOrFail($id);
+
+        if ( ! $question->canEdit() ) {
+            abort('403', 'Not authorized.');
+        }
 
         // set question's data from form data
         $question->title = $request->title;
@@ -172,6 +191,10 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
+
+        if ( ! $question->canEdit() ) {
+            abort('403', 'Not authorized.');
+        }
 
         $question->delete();
 
